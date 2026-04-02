@@ -95,6 +95,33 @@
             width: 100%;
         }
 
+        /* Menu Hambúrguer */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
         /* ===== HERO SECTION ===== */
         .hero {
             margin-top: 70px;
@@ -744,7 +771,43 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             nav ul {
-                gap: 1rem;
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                gap: 2rem;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav li {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                font-size: 1.2em;
+                padding: 10px 0;
+                display: block;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 80px 20px;
             }
 
             .hero h1 {
@@ -825,6 +888,34 @@
                 width: 10px;
                 height: 10px;
             }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 0.9em;
+            }
+
+            .about-text h2 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .contact h2 {
+                font-size: 2em;
+            }
+
+            .contact p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -841,6 +932,11 @@
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
@@ -1127,6 +1223,14 @@
 
         function autoPlay() {
             changeTestimonial(1);
+        }
+
+        // Toggle Menu Mobile
+        function toggleMenu() {
+            const navUl = document.querySelector('nav ul');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navUl.classList.toggle('active');
+            menuToggle.classList.toggle('active');
         }
 
         // Iniciar carrossel
